@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "scientific_name": "Panerophyta",
+    "hungarian_name": "Fatermetű"
+  },
+  {
+    "id": 2,
+    "scientific_name": "Chamaeophyta",
+    "hungarian_name": "Félcserje"
+  },
+  {
+    "id": 3,
+    "scientific_name": "Hemikryptophyta",
+    "hungarian_name": "Talajszint környékén telelő lágyszárú évelő"
+  },
+  {
+    "id": 4,
+    "scientific_name": "Kryptophyta",
+    "hungarian_name": "Talajban telelő lágyszárú évelő"
+  },
+  {
+    "id": 5,
+    "scientific_name": "Hemiterophyta",
+    "hungarian_name": "Kétéves"
+  },
+  {
+    "id": 6,
+    "scientific_name": "Terophyta",
+    "hungarian_name": "Egyéves"
+  },
+  {
+    "id": 7,
+    "scientific_name": "Epiphyta",
+    "hungarian_name": "Fákon élő, földben nem gyökerező növény"
+  }
+]
