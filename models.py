@@ -31,7 +31,7 @@ class PlantFamily(db.Model):
 
 class Plant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    scientific_name = db.Column(db.String(255), nullable=False)
+    scientific_name = db.Column(db.String(255), unique=True, nullable=False)
     hungarian_names = db.Column(postgresql.ARRAY(db.String, dimensions=1), nullable=False)
     division = db.Column(db.String(255))
     class_taxon = db.Column(db.String(255))
@@ -50,7 +50,7 @@ class Plant(db.Model):
     leaf_description = db.Column(db.String(255))
     flower_description = db.Column(db.String(255))
     fruit_description = db.Column(db.String(255))
-    description_other = db.Column(db.String(255))
+    description_other = db.Column(db.String(1023))
     image_links = db.Column(postgresql.ARRAY(db.String, dimensions=1))
     decorative_value = db.Column(db.String(255))
     pruning = db.Column(db.String(255))
