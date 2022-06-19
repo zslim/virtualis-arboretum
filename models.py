@@ -1,5 +1,6 @@
-from sqlalchemy.dialects import postgresql
 from marshmallow import post_load
+from sqlalchemy.dialects import postgresql
+
 from app_init import db, ma
 
 
@@ -7,7 +8,7 @@ class PlantLifeForm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     scientific_name = db.Column(db.String(255), nullable=False)
     hungarian_name = db.Column(db.String(255))
-    description = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(255))
     location_of_bud = db.Column(db.String(255))
     plants = db.relationship("Plant")
     weed_categories = db.relationship("WeedCategory")
@@ -31,7 +32,7 @@ class PlantFamily(db.Model):
 class Plant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     scientific_name = db.Column(db.String(255), nullable=False)
-    hungarian_name = db.Column(db.String(255), nullable=False)
+    hungarian_names = db.Column(postgresql.ARRAY(db.String, dimensions=1), nullable=False)
     division = db.Column(db.String(255))
     class_taxon = db.Column(db.String(255))
     family_id = db.Column(db.Integer, db.ForeignKey("plant_family.id"))
