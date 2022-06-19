@@ -6,7 +6,18 @@ from app_init import db, ma
 class PlantLifeForm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     scientific_name = db.Column(db.String(255), nullable=False)
-    hungarian_name = db.Column(db.String(255), nullable=False)
+    hungarian_name = db.Column(db.String(255))
+    description = db.Column(db.String(255), nullable=False)
+    location_of_bud = db.Column(db.String(255))
+    plants = db.relationship("Plant")
+    weed_categories = db.relationship("WeedCategory")
+
+
+class WeedCategory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(10), nullable=False)
+    life_form_id = db.Column(db.Integer, db.ForeignKey("plant_life_form.id"))
+    description = db.Column(db.String(255), nullable=False)
     plants = db.relationship("Plant")
 
 
@@ -25,7 +36,7 @@ class Plant(db.Model):
     class_taxon = db.Column(db.String(255))
     family_id = db.Column(db.Integer, db.ForeignKey("plant_family.id"))
     life_form_id = db.Column(db.Integer, db.ForeignKey("plant_life_form.id"))
-    other_category = db.Column(db.String(255))
+    weed_category_id = db.Column(db.Integer, db.ForeignKey("weed_category.id"))
     time_of_blooming = db.Column(db.String(255))
     time_of_ripening = db.Column(db.String(255))
     time_of_germination = db.Column(db.String(255))
@@ -61,6 +72,12 @@ class BaseSchema(ma.SQLAlchemyAutoSchema):
 class PlantLifeFormSchema(BaseSchema):
     class Meta:
         model = PlantLifeForm
+
+
+class WeedCategorySchema(BaseSchema):
+    class Meta:
+        model = WeedCategory
+        include_fk = True
 
 
 class PlantFamilySchema(BaseSchema):

@@ -2,36 +2,48 @@
   {
     "id": 1,
     "scientific_name": "Panerophyta",
-    "hungarian_name": "Fatermetű"
+    "hungarian_name": "Fa",
+    "description": "Fás szárú, fatermetű növény",
+    "location_of_bud": "Legalább 25 cm magasságban"
   },
   {
     "id": 2,
-    "scientific_name": "Chamaeophyta",
-    "hungarian_name": "Félcserje"
+    "scientific_name": "Chamaephyta",
+    "hungarian_name": "Félcserje",
+    "description": "Fás szárú törpecserje vagy kúszócserje",
+    "location_of_bud": "0-25 cm"
   },
   {
     "id": 3,
     "scientific_name": "Hemikryptophyta",
-    "hungarian_name": "Talajszint környékén telelő lágyszárú évelő"
+    "hungarian_name": "Talajszint környékén telelő lágyszárú évelő",
+    "description": "",
+    "location_of_bud": "A talaj felszínén vagy közvetlenül alatta"
   },
   {
     "id": 4,
     "scientific_name": "Kryptophyta",
-    "hungarian_name": "Talajban telelő lágyszárú évelő"
+    "hungarian_name": "Talajban telelő lágyszárú évelő",
+    "description": "Hagymás, gumós, vagy gyöktörzses növény",
+    "location_of_bud": "Talajban vagy víz alatt"
   },
   {
     "id": 5,
     "scientific_name": "Hemiterophyta",
-    "hungarian_name": "Kétéves"
+    "hungarian_name": "Kétéves",
+    "description": "",
+    "location_of_bud": "Tőlevélrózsában"
   },
   {
     "id": 6,
     "scientific_name": "Terophyta",
-    "hungarian_name": "Egyéves"
+    "hungarian_name": "Egyéves",
+    "description": "",
+    "location_of_bud": "Csak a magok telelnek át"
   },
   {
     "id": 7,
     "scientific_name": "Epiphyta",
-    "hungarian_name": "Fákon élő, földben nem gyökerező növény"
+    "hungarian_name": "Fákon élő, talajban nem gyökerező növény"
   }
 ]

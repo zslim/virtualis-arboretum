@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "name": "T1",
+    "life_form_id": 6,
+    "description": "Ősszel kelő, áttelelő, kora tavaszi egyéves"
+  },
+  {
+    "id": 2,
+    "name": "T2",
+    "life_form_id": 6,
+    "description": "Ősszel és tavasszal is csírázó, nyár eleji egyéves"
+  },
+  {
+    "id": 3,
+    "name": "T3",
+    "life_form_id": 6,
+    "description": "Tavasszal csírázó, nyár eleji egyéves"
+  },
+  {
+    "id": 4,
+    "name": "T4",
+    "life_form_id": 6,
+    "description": "Tavasszal csírázó, nyárutói egyéves"
+  },
+  {
+    "id": 5,
+    "name": "H1",
+    "life_form_id": 3,
+    "description": "Bojtos gyökérzetű évelő"
+  },
+  {
+    "id": 6,
+    "name": "H2",
+    "life_form_id": 3,
+    "description": "Indás évelő"
+  },
+  {
+    "id": 7,
+    "name": "H3",
+    "life_form_id": 3,
+    "description": "Szaporodásra képes karógyökerű évelő"
+  },
+  {
+    "id": 8,
+    "name": "H4",
+    "life_form_id": 3,
+    "description": "Szaporodásra nem képes kerógyökerű évelő"
+  },
+  {
+    "id": 9,
+    "name": "H5",
+    "life_form_id": 3,
+    "description": "Ferde gyöktörzsű évelő"
+  },
+  {
+    "id": 10,
+    "name": "G1",
+    "life_form_id": 4,
+    "description": "Szártarackos évelő"
+  },
+  {
+    "id": 11,
+    "name": "G2",
+    "life_form_id": 4,
+    "description": "Gumós évelő"
+  },
+  {
+    "id": 12,
+    "name": "G3",
+    "life_form_id": 4,
+    "description": "Szaporítógyökeres évelő"
+  },
+  {
+    "id": 13,
+    "name": "G4",
+    "life_form_id": 4,
+    "description": "Hagymás vagy hagymagumós évelő"
+  }
+]
