@@ -21,3 +21,11 @@ $ python db_setup/db_setup.py
 
 * Confirm that you want to drop all your tables
 * Done
+
+
+## Running webserver
+
+```shell
+$ cd virtualis-arboretum
+$ python server.py
+```
