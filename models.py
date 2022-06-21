@@ -6,7 +6,7 @@ from app_init import db, ma
 
 class PlantLifeForm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    scientific_name = db.Column(db.String(255), nullable=False)
+    scientific_name = db.Column(db.String(255), unique=True, nullable=False)
     hungarian_name = db.Column(db.String(255))
     description = db.Column(db.String(255))
     location_of_bud = db.Column(db.String(255))
@@ -24,7 +24,7 @@ class WeedCategory(db.Model):
 
 class PlantFamily(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    scientific_name = db.Column(db.String(255), nullable=False)
+    scientific_name = db.Column(db.String(255), unique=True, nullable=False)
     hungarian_name = db.Column(db.String(255), nullable=False)
     plants = db.relationship("Plant")
 
