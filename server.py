@@ -2,16 +2,21 @@ import logging
 
 import flask
 from marshmallow import exceptions
+from marshmallow_jsonschema import JSONSchema
 from sqlalchemy import exc
 from sqlalchemy.orm import exc as orm_exc
+from swagger_gen.lib.wrappers import swagger_metadata
+from swagger_gen import swagger
 
 import models
 import util
 from app_init import app, db
 
 LOGGER = logging.getLogger(__name__)
+JSON_SCHEMA = JSONSchema()
 
 
+@swagger_metadata(summary="Get all plants")  # TODO: response encoding & formatting
 @app.route("/plant", methods=["GET"])
 def get_plants():
     plants = models.Plant.query.all()
@@ -21,6 +26,11 @@ def get_plants():
 
 
 @app.route("/plant", methods=["POST"])
+@swagger_metadata(
+    summary="Add new plant",
+    request_model=JSON_SCHEMA.dump(models.PlantSchema())["definitions"]['PlantSchema']['properties'],
+    response_model=[(201, "Created"), (400, "Bad request"), (404, "Resource not found")]
+)
 def add_plant():
     payload = flask.request.json
     plant_schema = models.PlantSchema()
@@ -67,6 +77,11 @@ def handle_validation_error(error):
 def handle_integrity_error(error):
     response_body = util.create_error_message("constraint violation", error)
     return response_body, 400
+
+
+# Need to configure Swagger after url definitions
+swagger = swagger.Swagger(app=app, title="Swagger page")
+swagger.configure()
 
 
 if __name__ == '__main__':
