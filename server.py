@@ -12,11 +12,7 @@ from app_init import app, db
 LOGGER = logging.getLogger(__name__)
 
 
-# TODO: modularize routes and error handlers
-# TODO: decide how the entry point is going to be
-
-
-@app.route("/plants", methods=["GET"])
+@app.route("/plant", methods=["GET"])
 def get_plants():
     plants = models.Plant.query.all()
     plant_schema = models.PlantSchema(many=True)
