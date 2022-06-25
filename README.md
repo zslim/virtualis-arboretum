@@ -1,10 +1,12 @@
 # Virtuális Arborétum
 
 
-Ubuntu 20.04-en a `psycopg2` Python csomag installálásához szükség volt a következő Ubuntu libraryre:
+Ubuntu 20.04-en a `psycopg2` Python csomag installálásához szükség volt a `libpq-dev` Ubuntu libraryre.
+Ahhoz pedig downgrade-elnem kellett a `libpq5` csomagot.
 
 ```shell
-$ sudo apt-get install ibpq-dev
+$ sudo apt-get install libpq5=12.11-0ubuntu0.20.04.1
+$ sudo apt-get install libpq-dev
 ```
 
 
