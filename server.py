@@ -41,7 +41,7 @@ def add_plant():
     return plant_schema.dumps(plant), 201, {"Content-Type": "application/json, charset=utf-8"}
 
 
-@app.route("/plant/<_id>", methods=["DELETE"])
+@app.route("/plant/<int:_id>", methods=["DELETE"])
 def delete_plant(_id):
     plant_to_delete = models.Plant.query.filter_by(id=_id).first()
     db.session.delete(plant_to_delete)
@@ -74,7 +74,7 @@ def add_plant_family():
     return plant_family_schema.dumps(plant_family), 201, {"Content-Type": "application/json, charset=utf-8"}
 
 
-@app.route("/plant-family/<_id>", methods=["DELETE"])
+@app.route("/plant-family/<int:_id>", methods=["DELETE"])
 @swagger_metadata(query_params=["_id"])
 def delete_plant_family(_id):
     family_to_delete = models.PlantFamily.query.filter_by(id=_id).first()
