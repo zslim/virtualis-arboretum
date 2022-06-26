@@ -4,7 +4,6 @@ import flask
 from marshmallow import exceptions
 from sqlalchemy import exc
 from sqlalchemy.orm import exc as orm_exc
-from swagger_gen.lib.wrappers import swagger_metadata
 
 import app_init
 import models
@@ -14,7 +13,6 @@ from app_init import app, db
 LOGGER = logging.getLogger(__name__)
 
 
-@swagger_metadata(summary="Get all plants")
 @app.route("/plant", methods=["GET"])
 def get_plants():
     plants = models.Plant.query.all()
@@ -24,11 +22,6 @@ def get_plants():
 
 
 @app.route("/plant", methods=["POST"])
-@swagger_metadata(
-    summary="Add new plant",
-    request_model=util.get_schema_meta(models.PlantSchema),
-    response_model=[(201, "Created"), (400, "Bad request"), (404, "Resource not found")]
-)
 def add_plant():
     payload = flask.request.json
     plant_schema = models.PlantSchema()
@@ -40,7 +33,6 @@ def add_plant():
 
 
 @app.route("/plant/<_id>", methods=["DELETE"])
-@swagger_metadata(query_params=[])
 def delete_plant(_id):
     plant_to_delete = models.Plant.query.filter_by(id=_id).first()
     db.session.delete(plant_to_delete)
@@ -58,11 +50,6 @@ def get_plant_families():
 
 
 @app.route("/plant-family", methods=["POST"])
-@swagger_metadata(
-    summary="Add plant family",
-    request_model=util.get_schema_meta(models.PlantFamilySchema),
-    response_model=[(201, "Created"), (400, "Bad request")]
-)
 def add_plant_family():
     payload = flask.request.json
     plant_family_schema = models.PlantFamilySchema()
@@ -73,7 +60,6 @@ def add_plant_family():
 
 
 @app.route("/plant-family/<_id>", methods=["DELETE"])
-@swagger_metadata(query_params=[])
 def delete_plant_family(_id):
     family_to_delete = models.PlantFamily.query.filter_by(id=_id).first()
     db.session.delete(family_to_delete)
@@ -95,6 +81,17 @@ def get_weed_categories():
     categories = models.WeedCategory.query.all()
     category_schema = models.WeedCategorySchema(many=True)
     return category_schema.dumps(categories), 200, {"Content-Type": "application/json, charset=utf-8"}
+
+
+@app.route("/swagger/swagger.json", methods=["GET"])
+def get_swagger_specification():
+    swagger_json = util.read_api_spec(app_init.HOST, app_init.PORT)
+    return flask.jsonify(swagger_json), 200
+
+
+@app.route("/swagger", methods=["GET"])
+def render_swagger_ui():
+    return flask.render_template("swagger-index.html")
 
 
 @app.errorhandler(orm_exc.UnmappedInstanceError)
@@ -121,10 +118,9 @@ def handle_data_error(error):
     return response_body, 400, {"Content-Type": "application/json, charset=utf-8"}
 
 
-# Need to configure Swagger after url definitions
-swagger = app_init.init_swagger(app)
-swagger.configure()
-
-
 if __name__ == '__main__':
-    app.run()
+    app.run(
+        host=app_init.HOST,
+        port=app_init.PORT,
+        debug=True
+    )

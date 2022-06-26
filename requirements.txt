@@ -5,6 +5,4 @@ marshmallow==3.16.0
 marshmallow-sqlalchemy==0.28.0
 psycopg2==2.9.3
 SQLAlchemy==1.4.37
-swagger_gen
-marshmallow-jsonschema
-numpy
+ruamel.yaml

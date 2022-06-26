@@ -10,54 +10,57 @@ info:
     url: https://mit-license.org/
 openapi: 3.0.1
 servers:
-- url: http://127.0.0.1:5000
+  - url: http://127.0.0.1:5050
 tags:
-- name: Plant
-  description: Plant species
-- name: Plant family
-  description: Family as in taxonomical rank
-  externalDocs:
-    description: Learn more on Wikipedia
-    url: https://hu.wikipedia.org/wiki/Család_(rendszertan)
-- name: Life form
-  description: Categories according to Raunkiær's system
-  externalDocs:
-    description: Learn more on Wikipedia
-    url: https://hu.wikipedia.org/wiki/Raunkiær-féle_életforma-osztályozás
-- name: Weed category
-  description: Categories according to Miklós Ujvárosi's system
-  externalDocs:
-    description: Learn more on Wikipedia
-    url: https://hu.wikipedia.org/wiki/Raunkiær-féle_életforma-osztályozás
+  - name: Plant
+    description: Plant species
+  - name: Plant family
+    description: Family as in taxonomical rank
+    externalDocs:
+      description: Learn more on Wikipedia
+      url: https://hu.wikipedia.org/wiki/Csal%C3%A1d_(rendszertan)
+  - name: Life form
+    description: Categories according to Raunkiær's system
+    externalDocs:
+      description: Learn more on Wikipedia
+      url: https://hu.wikipedia.org/wiki/Raunki%C3%A6r-f%C3%A9le_%C3%A9letforma-oszt%C3%A1lyoz%C3%A1s
+  - name: Weed category
+    description: Categories according to Miklós Ujvárosi's system
+    externalDocs:
+      description: Learn more on Wikipedia
+      url: https://hu.wikipedia.org/wiki/Raunki%C3%A6r-f%C3%A9le_%C3%A9letforma-oszt%C3%A1lyoz%C3%A1s
 paths:
   "/life-form":
     get:
       summary: Get all life forms
-      parameters: []
+      parameters: [ ]
       responses:
         '200':
           description: Success
       tags:
-      - Life form
+        - Life form
       description: "Examples: Panerophyta, Hemikryptophyta, Therophyta"
   "/plant":
     get:
       description: get_plants
-      parameters: []
+      parameters: [ ]
       responses:
         '200':
           description: Success
       summary: Get all plants
       tags:
-      - Plant
+        - Plant
     post:
       description: add_plant
-      parameters: []
+      parameters: [ ]
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/plant"
+              "$ref": "#/components/schemas/Plant"
+            examples:
+              oxalis:
+                "$ref": "#/components/examples/plant_oxalis_corniculata"
       responses:
         '201':
           description: Created
@@ -67,24 +70,27 @@ paths:
           description: Resource not found
       summary: Add new plant
       tags:
-      - Plant
+        - Plant
   "/plant-family":
     get:
       summary: Get all plant families
-      parameters: []
+      parameters: [ ]
       responses:
         '200':
           description: Success
       tags:
-      - Plant family
+        - Plant family
     post:
       description: add_plant_family
-      parameters: []
+      parameters: [ ]
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/plant_family"
+              "$ref": "#/components/schemas/Plant family"
+            examples:
+              oxalidaceae:
+                "$ref": "#/components/examples/plant_family_oxalidaceae"
       responses:
         '201':
           description: Created
@@ -92,51 +98,51 @@ paths:
           description: Bad request
       summary: Add plant family
       tags:
-      - Plant family
+        - Plant family
   "/plant-family/{_id}":
     delete:
       summary: Delete plant family
       description: Delete plant family by id
       parameters:
-      - in: path
-        name: _id
-        required: true
-        schema:
-          nullable: false
-          type: integer
+        - in: path
+          name: _id
+          required: true
+          schema:
+            nullable: false
+            type: integer
       responses:
         '200':
           description: Success
       tags:
-      - Plant family
+        - Plant family
   "/plant/{_id}":
     delete:
       summary: Delete plant
       description: Delete plant by id
       parameters:
-      - in: path
-        name: _id
-        required: true
-        schema:
-          nullable: false
-          type: integer
+        - in: path
+          name: _id
+          required: true
+          schema:
+            nullable: false
+            type: integer
       responses:
         '200':
           description: Success
       tags:
-      - Plant
+        - Plant
   "/weed-category":
     get:
       summary: Get all weed categories
-      parameters: []
+      parameters: [ ]
       responses:
         '200':
           description: Success
       tags:
-      - Weed category
+        - Weed category
 components:
   schemas:
-    plant:
+    Plant:
       properties:
         class_taxon:
           nullable: true
@@ -239,7 +245,7 @@ components:
           nullable: true
           type: integer
       type: object
-    plant_family:
+    Plant family:
       properties:
         hungarian_name:
           nullable: false
@@ -251,3 +257,13 @@ components:
           nullable: false
           type: string
       type: object
+  examples:
+    plant_oxalis_corniculata:
+      value:
+        scientific_name: Oxalis corniculata
+        hungarian_names:
+          - szürke madársóska
+    plant_family_oxalidaceae:
+      value:
+        scientific_name: Oxalidaceae
+        hungarian_name: madársóskafélék

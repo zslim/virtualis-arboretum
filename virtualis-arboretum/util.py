@@ -1,6 +1,6 @@
 import json
 
-from marshmallow_jsonschema import JSONSchema
+from ruamel.yaml import YAML
 
 
 def create_error_message(cause, error):
@@ -15,15 +15,11 @@ def create_error_message(cause, error):
     return payload_string
 
 
-def get_first_type_name(type_metadata):
-    return type_metadata[0] if type(type_metadata).__name__ == "list" else type_metadata
+def read_api_spec(host, port):
+    oas_path = "../open_api_specification.yaml"
+    yaml = YAML(typ="safe")
+    with open(oas_path) as yaml_file:
+        oas_dict = yaml.load(yaml_file)
+    oas_dict["servers"][0] = {"url": f"http://{host}:{port}"}
+    return oas_dict
 
-
-def get_schema_meta(schema_class):
-    json_schema = JSONSchema()
-    schema = schema_class()
-    meta = json_schema.dump(schema)
-    schema_name = schema.__class__.__name__
-    properties = meta["definitions"][schema_name]["properties"]
-    request_structure = {d["title"]: get_first_type_name(d["type"]) for d in properties.values()}
-    return request_structure
