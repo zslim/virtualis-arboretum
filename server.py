@@ -4,9 +4,9 @@ import flask
 from marshmallow import exceptions
 from sqlalchemy import exc
 from sqlalchemy.orm import exc as orm_exc
-from swagger_gen import swagger
 from swagger_gen.lib.wrappers import swagger_metadata
 
+import app_init
 import models
 import util
 from app_init import app, db
@@ -122,7 +122,7 @@ def handle_data_error(error):
 
 
 # Need to configure Swagger after url definitions
-swagger = swagger.Swagger(app=app, title="Swagger page")
+swagger = app_init.init_swagger(app)
 swagger.configure()
 
 
