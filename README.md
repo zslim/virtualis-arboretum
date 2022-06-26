@@ -31,3 +31,9 @@ $ python db_setup/db_setup.py
 $ cd virtualis-arboretum
 $ python server.py
 ```
+
+
+## Swagger UI
+
+This app contains an OpenApi 3 documentation and a Swagger UI based on that.
+When the webserver is running, it is accessible on `/swagger`.

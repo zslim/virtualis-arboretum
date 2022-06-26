@@ -30,7 +30,7 @@ tags:
       description: Learn more on Wikipedia
       url: https://hu.wikipedia.org/wiki/Raunki%C3%A6r-f%C3%A9le_%C3%A9letforma-oszt%C3%A1lyoz%C3%A1s
 paths:
-  "/life-form":
+  "/life-forms":
     get:
       summary: Get all life forms
       parameters: [ ]
@@ -40,7 +40,7 @@ paths:
       tags:
         - Life form
       description: "Examples: Panerophyta, Hemikryptophyta, Therophyta"
-  "/plant":
+  "/plants":
     get:
       description: get_plants
       parameters: [ ]
@@ -57,7 +57,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Plant"
+              "$ref": "#/components/schemas/plant"
             examples:
               oxalis:
                 "$ref": "#/components/examples/plant_oxalis_corniculata"
@@ -71,7 +71,7 @@ paths:
       summary: Add new plant
       tags:
         - Plant
-  "/plant-family":
+  "/plant-families":
     get:
       summary: Get all plant families
       parameters: [ ]
@@ -87,7 +87,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Plant family"
+              "$ref": "#/components/schemas/plant-family"
             examples:
               oxalidaceae:
                 "$ref": "#/components/examples/plant_family_oxalidaceae"
@@ -99,13 +99,13 @@ paths:
       summary: Add plant family
       tags:
         - Plant family
-  "/plant-family/{_id}":
+  "/plant-families/{family-id}":
     delete:
       summary: Delete plant family
       description: Delete plant family by id
       parameters:
         - in: path
-          name: _id
+          name: family-id
           required: true
           schema:
             nullable: false
@@ -115,13 +115,12 @@ paths:
           description: Success
       tags:
         - Plant family
-  "/plant/{_id}":
-    delete:
-      summary: Delete plant
-      description: Delete plant by id
+  "/plants/{plant-id}":
+    get:
+      summary: Get plant by id
       parameters:
         - in: path
-          name: _id
+          name: plant-id
           required: true
           schema:
             nullable: false
@@ -131,7 +130,22 @@ paths:
           description: Success
       tags:
         - Plant
-  "/weed-category":
+    delete:
+      summary: Delete plant
+      description: Delete plant by id
+      parameters:
+        - in: path
+          name: plant-id
+          required: true
+          schema:
+            nullable: false
+            type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Plant
+  "/weed-categories":
     get:
       summary: Get all weed categories
       parameters: [ ]
@@ -142,7 +156,7 @@ paths:
         - Weed category
 components:
   schemas:
-    Plant:
+    plant:
       properties:
         class_taxon:
           nullable: true
@@ -245,7 +259,7 @@ components:
           nullable: true
           type: integer
       type: object
-    Plant family:
+    plant-family:
       properties:
         hungarian_name:
           nullable: false
