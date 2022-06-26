@@ -9,8 +9,9 @@ logging.basicConfig(format="%(asctime)s [%(levelname)s] %(name)s: %(message)s", 
 
 DB_NAME = "arboretum_dev"
 
-app = Flask(__name__)
+app = Flask("virtualis_arboretum")
 app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://postgres:postgres@localhost:5432/{DB_NAME}"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
