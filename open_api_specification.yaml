@@ -1,0 +1,253 @@
+---
+info:
+  title: Virtuális Arborétum API
+  version: 0.0.1
+  contact:
+    name: zslim
+    url: https://github.com/zslim
+  license:
+    name: MIT License
+    url: https://mit-license.org/
+openapi: 3.0.1
+servers:
+- url: http://127.0.0.1:5000
+tags:
+- name: Plant
+  description: Plant species
+- name: Plant family
+  description: Family as in taxonomical rank
+  externalDocs:
+    description: Learn more on Wikipedia
+    url: https://hu.wikipedia.org/wiki/Család_(rendszertan)
+- name: Life form
+  description: Categories according to Raunkiær's system
+  externalDocs:
+    description: Learn more on Wikipedia
+    url: https://hu.wikipedia.org/wiki/Raunkiær-féle_életforma-osztályozás
+- name: Weed category
+  description: Categories according to Miklós Ujvárosi's system
+  externalDocs:
+    description: Learn more on Wikipedia
+    url: https://hu.wikipedia.org/wiki/Raunkiær-féle_életforma-osztályozás
+paths:
+  "/life-form":
+    get:
+      summary: Get all life forms
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+      - Life form
+      description: "Examples: Panerophyta, Hemikryptophyta, Therophyta"
+  "/plant":
+    get:
+      description: get_plants
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      summary: Get all plants
+      tags:
+      - Plant
+    post:
+      description: add_plant
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/plant"
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+        '404':
+          description: Resource not found
+      summary: Add new plant
+      tags:
+      - Plant
+  "/plant-family":
+    get:
+      summary: Get all plant families
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+      - Plant family
+    post:
+      description: add_plant_family
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/plant_family"
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+      summary: Add plant family
+      tags:
+      - Plant family
+  "/plant-family/{_id}":
+    delete:
+      summary: Delete plant family
+      description: Delete plant family by id
+      parameters:
+      - in: path
+        name: _id
+        required: true
+        schema:
+          nullable: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+      - Plant family
+  "/plant/{_id}":
+    delete:
+      summary: Delete plant
+      description: Delete plant by id
+      parameters:
+      - in: path
+        name: _id
+        required: true
+        schema:
+          nullable: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+      - Plant
+  "/weed-category":
+    get:
+      summary: Get all weed categories
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+      - Weed category
+components:
+  schemas:
+    plant:
+      properties:
+        class_taxon:
+          nullable: true
+          type: string
+        decorative_value:
+          nullable: true
+          type: string
+        description_other:
+          nullable: true
+          type: string
+        distance_of_lines:
+          nullable: true
+          type: string
+        distance_of_plants:
+          nullable: true
+          type: string
+        division:
+          nullable: true
+          type: string
+        ecological_function:
+          nullable: true
+          type: string
+        family_id:
+          nullable: true
+          type: integer
+        flower_description:
+          nullable: true
+          type: string
+        frost_tolerance:
+          nullable: true
+          type: string
+        fruit_description:
+          nullable: true
+          type: string
+        gardening_function:
+          nullable: true
+          type: string
+        height:
+          nullable: true
+          type: string
+        humidity_preference:
+          nullable: true
+          type: string
+        hungarian_names:
+          nullable: false
+          type: array
+          items:
+            type: string
+        id:
+          nullable: true
+          type: integer
+        image_links:
+          nullable: true
+          type: array
+          items:
+            type: string
+        leaf_description:
+          nullable: true
+          type: string
+        life_form_id:
+          nullable: true
+          type: integer
+        light_preference:
+          nullable: true
+          type: string
+        natural_habitat:
+          nullable: true
+          type: string
+        pests:
+          nullable: true
+          type: string
+        preferred_soil:
+          nullable: true
+          type: string
+        propagation:
+          nullable: true
+          type: string
+        pruning:
+          nullable: true
+          type: string
+        scientific_name:
+          nullable: false
+          type: string
+        time_of_blooming:
+          nullable: true
+          type: string
+        time_of_germination:
+          nullable: true
+          type: string
+        time_of_ripening:
+          nullable: true
+          type: string
+        toxicity:
+          nullable: true
+          type: string
+        usage:
+          nullable: true
+          type: string
+        weed_category_id:
+          nullable: true
+          type: integer
+      type: object
+    plant_family:
+      properties:
+        hungarian_name:
+          nullable: false
+          type: string
+        id:
+          nullable: true
+          type: integer
+        scientific_name:
+          nullable: false
+          type: string
+      type: object

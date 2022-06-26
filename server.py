@@ -2,21 +2,19 @@ import logging
 
 import flask
 from marshmallow import exceptions
-from marshmallow_jsonschema import JSONSchema
 from sqlalchemy import exc
 from sqlalchemy.orm import exc as orm_exc
-from swagger_gen.lib.wrappers import swagger_metadata
 from swagger_gen import swagger
+from swagger_gen.lib.wrappers import swagger_metadata
 
 import models
 import util
 from app_init import app, db
 
 LOGGER = logging.getLogger(__name__)
-JSON_SCHEMA = JSONSchema()
 
 
-@swagger_metadata(summary="Get all plants")  # TODO: response encoding & formatting
+@swagger_metadata(summary="Get all plants")
 @app.route("/plant", methods=["GET"])
 def get_plants():
     plants = models.Plant.query.all()
@@ -41,7 +39,8 @@ def add_plant():
     return plant_schema.dumps(plant), 201, {"Content-Type": "application/json, charset=utf-8"}
 
 
-@app.route("/plant/<int:_id>", methods=["DELETE"])
+@app.route("/plant/<_id>", methods=["DELETE"])
+@swagger_metadata(query_params=[])
 def delete_plant(_id):
     plant_to_delete = models.Plant.query.filter_by(id=_id).first()
     db.session.delete(plant_to_delete)
@@ -62,8 +61,7 @@ def get_plant_families():
 @swagger_metadata(
     summary="Add plant family",
     request_model=util.get_schema_meta(models.PlantFamilySchema),
-    response_model=[(201, "Created"), (400, "Bad request")],
-    query_params=["what", "hey", "ok"]
+    response_model=[(201, "Created"), (400, "Bad request")]
 )
 def add_plant_family():
     payload = flask.request.json
@@ -74,8 +72,8 @@ def add_plant_family():
     return plant_family_schema.dumps(plant_family), 201, {"Content-Type": "application/json, charset=utf-8"}
 
 
-@app.route("/plant-family/<int:_id>", methods=["DELETE"])
-@swagger_metadata(query_params=["_id"])
+@app.route("/plant-family/<_id>", methods=["DELETE"])
+@swagger_metadata(query_params=[])
 def delete_plant_family(_id):
     family_to_delete = models.PlantFamily.query.filter_by(id=_id).first()
     db.session.delete(family_to_delete)
