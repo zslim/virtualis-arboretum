@@ -1,13 +1,30 @@
 # Virtuális Arborétum
 
+## OS level dependencies
 
-Ubuntu 20.04-en a `psycopg2` Python csomag installálásához szükség volt a `libpq-dev` Ubuntu libraryre.
-Ahhoz pedig downgrade-elnem kellett a `libpq5` csomagot.
+I'm using Ubuntu 20.04 for development. 
+On this system, `psycopg2` depends on the `libpq-dev` and `python[version]-dev` packages.
+
+Here's what I did to be able to install `psycopg2`:
+
+```shell
+$ sudo apt-get install python3.9-dev libpq-dev
+```
+
+### Notes
+
+If you're using the default Python version (which is `3.8` for 20.04), 
+you don't need to specify minor version in the dev package: `python3-dev` is going to work.
+
+On one environment, I ran into errors when trying to install `libpq-dev`, 
+`apt` kept complaining about the version of the `libpq5` package.
+Eventually I could solve this by downgrading `libpq5`:
 
 ```shell
 $ sudo apt-get install libpq5=12.11-0ubuntu0.20.04.1
-$ sudo apt-get install libpq-dev
 ```
+
+After this, `sudo apt-get install libpq-dev` worked.
 
 
 ## Setting up the database
@@ -17,7 +34,7 @@ $ sudo apt-get install libpq-dev
 * Run setup script for table creation like this:
 
 ```shell
-$ cd virtualis-arboretum
+$ cd arboretum
 $ python db_setup/db_setup.py
 ```
 
@@ -27,11 +44,17 @@ $ python db_setup/db_setup.py
 
 ## Running webserver
 
+### For trial & debugging
+
 ```shell
-$ cd virtualis-arboretum
 $ python server.py
 ```
 
+### For production use
+
+```shell
+$ gunicorn --access-logfile - arboretum.server:app
+```
 
 ## Swagger UI
 
