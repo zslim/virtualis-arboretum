@@ -94,7 +94,7 @@ def get_weed_categories():
 
 @app.route("/swagger/swagger.json", methods=["GET"])
 def get_swagger_specification():
-    swagger_json = util.read_api_spec(app_init.HOST, app_init.PORT)
+    swagger_json = util.read_api_spec()
     return flask.jsonify(swagger_json), 200
 
 

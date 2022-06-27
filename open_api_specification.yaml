@@ -10,7 +10,8 @@ info:
     url: https://mit-license.org/
 openapi: 3.0.1
 servers:
-  - url: http://127.0.0.1:5050
+  - url: http://arboretum-api-dev.herokuapp.com
+  - url: http://127.0.0.1:8000
 tags:
   - name: Plant
     description: Plant species

@@ -1,4 +1,5 @@
 import json
+import os
 
 from ruamel.yaml import YAML
 
@@ -15,11 +16,11 @@ def create_error_message(cause, error):
     return payload_string
 
 
-def read_api_spec(host, port):
-    oas_path = "../open_api_specification.yaml"
+def read_api_spec():
+    oas_file = "open_api_specification.yaml"
+    oas_path = os.path.join(os.getcwd(), oas_file)
     yaml = YAML(typ="safe")
     with open(oas_path) as yaml_file:
         oas_dict = yaml.load(yaml_file)
-    oas_dict["servers"][0] = {"url": f"http://{host}:{port}"}
     return oas_dict
 
