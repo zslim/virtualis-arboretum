@@ -34,8 +34,8 @@ After this, `sudo apt-get install libpq-dev` worked.
 * Run setup script for table creation like this:
 
 ```shell
-$ cd arboretum
-$ python db_setup/db_setup.py
+$ cd arboretum/db_setup
+$ python db_setup.py
 ```
 
 * Confirm that you want to drop all your tables

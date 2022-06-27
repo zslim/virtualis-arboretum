@@ -42,7 +42,7 @@ def get_user_confirmation():
     time.sleep(0.5)
     database_name = app_init.app.config.get("SQLALCHEMY_DATABASE_URI").split("/")[-1]
     confirm_input = input(f"You are about to drop every table from the '{database_name}' database. "
-                          f"Please type the name of the database id you are sure about this. ")
+                          f"Please type the name of the database if you are sure about this. ")
     if confirm_input.lower() != database_name:
         LOGGER.error(f"Drop not confirmed (you typed: '{confirm_input}'). Aborting.")
         raise RuntimeError(f"Aborting drop of database {database_namey}.")
