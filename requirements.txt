@@ -1,8 +1,9 @@
 Flask==2.1.2
 flask-marshmallow==0.14.0
 Flask-SQLAlchemy==2.5.1
+gunicorn
 marshmallow==3.16.0
 marshmallow-sqlalchemy==0.28.0
 psycopg2==2.9.3
-SQLAlchemy==1.4.37
 ruamel.yaml
+SQLAlchemy==1.4.37
