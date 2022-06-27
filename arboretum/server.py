@@ -5,10 +5,10 @@ from marshmallow import exceptions
 from sqlalchemy import exc
 from sqlalchemy.orm import exc as orm_exc
 
-import app_init
-import models
-import util
-from app_init import app, db
+from arboretum import app_init
+from arboretum import models
+from arboretum import util
+from arboretum.app_init import app, db
 
 LOGGER = logging.getLogger(__name__)
 CONTENT_TYPE_HEADER_JSON_UTF_8 = {"Content-Type": "application/json, charset=utf-8"}

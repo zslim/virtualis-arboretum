@@ -1,7 +1,7 @@
 from marshmallow import post_load
 from sqlalchemy.dialects import postgresql
 
-from app_init import db, ma
+from arboretum.app_init import db, ma
 
 
 class PlantLifeForm(db.Model):
