@@ -127,6 +127,12 @@ def handle_data_error(error):
     return response_body, 400, CONTENT_TYPE_HEADER_JSON_UTF_8
 
 
+@app.errorhandler(exc.OperationalError)
+def handle_operational_error(error):
+    response_body = util.create_error_message("database connection could not be established", error)
+    return response_body, 500, CONTENT_TYPE_HEADER_JSON_UTF_8
+
+
 if __name__ == '__main__':
     app.run(
         host=app_init.HOST,
