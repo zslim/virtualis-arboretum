@@ -17,7 +17,7 @@ def create_error_response(error, message, status_code):
         }
     }
     response_body = json.dumps(payload)
-    response = flask.Response(response_body, status_code, {"Content-Type": "application/json"})
+    response = flask.Response(response_body, status_code, {"Content-Type": "application/json, charset=utf-8"})
     return response
 
 

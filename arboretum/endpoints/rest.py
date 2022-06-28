@@ -64,7 +64,7 @@ def add_plant_family():
     return plant_family_schema.dumps(plant_family), 201, CONTENT_TYPE_HEADER_JSON_UTF_8
 
 
-@blueprint.delete("/plant-family/<_id>")
+@blueprint.delete("/plant-families/<_id>")
 def delete_plant_family(_id):
     family_to_delete = models.PlantFamily.query.filter_by(id=_id).first()
     models.db.session.delete(family_to_delete)
