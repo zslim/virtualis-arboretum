@@ -1,1 +1,1 @@
-web: gunicorn arboretum.server:app
+web: gunicorn arboretum.app:app
