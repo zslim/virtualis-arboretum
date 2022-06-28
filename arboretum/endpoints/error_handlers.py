@@ -54,3 +54,10 @@ def handle_operational_error(error):
     error_message = "database connection could not be established"
     status_code = 500
     return create_error_response(error, error_message, status_code)
+
+
+@blueprint.app_errorhandler(exc.PendingRollbackError)
+def handle_pending_rollback_error(error):
+    error_message = "session rollback pending"
+    status_code = 500
+    return create_error_response(error, error_message, status_code)
