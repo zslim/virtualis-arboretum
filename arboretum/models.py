@@ -1,7 +1,10 @@
+from flask_marshmallow import Marshmallow
+from flask_sqlalchemy import SQLAlchemy
 from marshmallow import post_load
 from sqlalchemy.dialects import postgresql
 
-from arboretum.app_init import db, ma
+db = SQLAlchemy()
+ma = Marshmallow()
 
 
 class PlantLifeForm(db.Model):

@@ -47,13 +47,13 @@ $ python db_setup.py
 ### For trial & debugging
 
 ```shell
-$ python server.py
+$ python app.py
 ```
 
 ### For production use
 
 ```shell
-$ gunicorn --access-logfile - arboretum.server:app
+$ gunicorn --access-logfile - arboretum.app:app
 ```
 
 ## Swagger UI

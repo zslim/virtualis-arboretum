@@ -5,8 +5,8 @@ import time
 
 import marshmallow
 
-from arboretum import app_init
 from arboretum import models
+from arboretum.app import app
 
 LOGGER = logging.getLogger(__name__)
 
@@ -40,12 +40,12 @@ def load_init_data():
 def get_user_confirmation():
     LOGGER.warning("Entering the danger zone.")
     time.sleep(0.5)
-    database_name = app_init.app.config.get("SQLALCHEMY_DATABASE_URI").split("/")[-1]
+    database_name = app.config.get("SQLALCHEMY_DATABASE_URI").split("/")[-1]
     confirm_input = input(f"You are about to drop every table from the '{database_name}' database. "
                           f"Please type the name of the database if you are sure about this. ")
     if confirm_input.lower() != database_name:
         LOGGER.error(f"Drop not confirmed (you typed: '{confirm_input}'). Aborting.")
-        raise RuntimeError(f"Aborting drop of database {database_namey}.")
+        raise RuntimeError(f"Aborting drop of database {database_name}.")
 
 
 def setup_database():
