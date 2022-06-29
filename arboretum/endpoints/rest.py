@@ -59,8 +59,8 @@ def get_life_forms():
     return life_form_schema.jsonify(life_forms), 200
 
 
-@blueprint.get("/weed-categories")
-def get_weed_categories():
-    categories = models.WeedCategory.query.filter_by(**flask.request.args).all()
-    category_schema = models.WeedCategorySchema(many=True)
+@blueprint.get("/life-form-subcategories")
+def get_life_form_subcategories():
+    categories = models.LifeFormSubcategory.query.filter_by(**flask.request.args).all()
+    category_schema = models.LifeFormSubcategorySchema(many=True)
     return category_schema.jsonify(categories), 200

@@ -25,8 +25,8 @@ tags:
     externalDocs:
       description: Learn more on Wikipedia
       url: https://hu.wikipedia.org/wiki/Raunki%C3%A6r-f%C3%A9le_%C3%A9letforma-oszt%C3%A1lyoz%C3%A1s
-  - name: Weed category
-    description: Categories according to Miklós Ujvárosi's system
+  - name: Life form subcategory
+    description: Subcategories for some life forms, originally used for weed (see Miklós Ujvárosi)
     externalDocs:
       description: Learn more on Wikipedia
       url: https://hu.wikipedia.org/wiki/Raunki%C3%A6r-f%C3%A9le_%C3%A9letforma-oszt%C3%A1lyoz%C3%A1s
@@ -146,15 +146,15 @@ paths:
           description: Success
       tags:
         - Plant
-  "/weed-categories":
+  "/life-form-subcategories":
     get:
-      summary: Get all weed categories
+      summary: Get all life form subcategories
       parameters: [ ]
       responses:
         '200':
           description: Success
       tags:
-        - Weed category
+        - Life form subcategory
 components:
   schemas:
     plant:
@@ -256,7 +256,7 @@ components:
         usage:
           nullable: true
           type: string
-        weed_category_id:
+        life_form_subcategory_id:
           nullable: true
           type: integer
       type: object

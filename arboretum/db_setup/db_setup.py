@@ -27,7 +27,8 @@ def load_init_data():
     init_data_directory = "init_data"
     # Order: referenced table first, referencing one later
     init_data_files_schemas = {"families.json": models.PlantFamilySchema, "life_forms.json": models.PlantLifeFormSchema,
-                               "weed_categories.json": models.WeedCategorySchema, "plants.json": models.PlantSchema}
+                               "life_form_subcategories.json": models.LifeFormSubcategorySchema,
+                               "plants.json": models.PlantSchema}
 
     data_objects = []
     for file_name, schema in init_data_files_schemas.items():

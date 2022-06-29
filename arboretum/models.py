@@ -14,10 +14,10 @@ class PlantLifeForm(db.Model):
     description = db.Column(db.String(255))
     location_of_bud = db.Column(db.String(255))
     plants = db.relationship("Plant")
-    weed_categories = db.relationship("WeedCategory")
+    life_form_subcategories = db.relationship("LifeFormSubcategory")
 
 
-class WeedCategory(db.Model):
+class LifeFormSubcategory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(10), nullable=False)
     life_form_id = db.Column(db.Integer, db.ForeignKey("plant_life_form.id"))
@@ -40,7 +40,7 @@ class Plant(db.Model):
     class_taxon = db.Column(db.String(255))
     family_id = db.Column(db.Integer, db.ForeignKey("plant_family.id"))
     life_form_id = db.Column(db.Integer, db.ForeignKey("plant_life_form.id"))
-    weed_category_id = db.Column(db.Integer, db.ForeignKey("weed_category.id"))
+    life_form_subcategory_id = db.Column(db.Integer, db.ForeignKey("life_form_subcategory.id"))
     time_of_blooming = db.Column(db.String(255))
     time_of_ripening = db.Column(db.String(255))
     time_of_germination = db.Column(db.String(255))
@@ -78,9 +78,9 @@ class PlantLifeFormSchema(BaseSchema):
         model = PlantLifeForm
 
 
-class WeedCategorySchema(BaseSchema):
+class LifeFormSubcategorySchema(BaseSchema):
     class Meta:
-        model = WeedCategory
+        model = LifeFormSubcategory
         include_fk = True
 
 
