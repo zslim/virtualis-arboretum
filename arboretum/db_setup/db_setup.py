@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import time
+from argparse import ArgumentParser
 
 import marshmallow
 
@@ -49,23 +50,35 @@ def get_user_confirmation():
         raise RuntimeError(f"Aborting drop of database {database_name}.")
 
 
-def setup_database():
+def setup_database(empty=False):
     LOGGER.info("Setting up tables")
     models.db.drop_all()
     models.db.create_all()
 
-    LOGGER.info("Loading data from files")
-    init_data = load_init_data()
-    models.db.session.add_all(init_data)
-    models.db.session.commit()
+    if not empty:
+        LOGGER.info("Loading data from files")
+        init_data = load_init_data()
+        models.db.session.add_all(init_data)
+        models.db.session.commit()
 
 
-def setup_main():
+def get_arguments():
+    parser = ArgumentParser()
+    parser.add_argument("-y", action="store_false", dest="manual_confirmation",
+                        help="Not asking for user confirmation if present")
+    parser.add_argument("--empty", action="store_true", help="Initializing empty tables if present")
+    args, unknown = parser.parse_known_args()
+    return args
+
+
+def setup_main(manual_confirmation, empty):
     LOGGER.info("Starting")
-    get_user_confirmation()
-    setup_database()
+    if manual_confirmation:
+        get_user_confirmation()
+    setup_database(empty)
     LOGGER.info("Done")
 
 
 if __name__ == '__main__':
-    setup_main()
+    arguments = get_arguments()
+    setup_main(arguments.manual_confirmation, arguments.empty)
