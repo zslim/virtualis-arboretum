@@ -5,5 +5,6 @@ gunicorn
 marshmallow==3.16.0
 marshmallow-sqlalchemy==0.28.0
 psycopg2==2.9.3
+pytest
 ruamel.yaml
 SQLAlchemy==1.4.37

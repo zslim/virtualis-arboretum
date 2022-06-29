@@ -60,3 +60,10 @@ $ gunicorn --access-logfile - arboretum.app:app
 
 This app contains an OpenApi 3 documentation and a Swagger UI based on that.
 When the webserver is running, it is accessible on `/swagger`.
+
+
+## Unittests
+
+```shell
+$ pytest test
+```
